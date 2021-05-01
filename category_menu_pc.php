@@ -5,6 +5,7 @@
 	require_once("names.php");
 	require_once("counter.php");
 	
+	$root_category = 185;
 ?>
 
 <html>
@@ -23,7 +24,7 @@
            <div class="list-group">
               <ul class="w3-ul w3-card-4">
                  	<?php
-							$category_sub = mysqli_query($c,"select * from category_sub where p_id=0 order by cat_order");
+							$category_sub = mysqli_query($c,"select * from category_sub where p_id=$root_category order by cat_order");
 							while($category_sub_data = mysqli_fetch_array($category_sub))
 							{
 								$category_sub_cat_id = $category_sub_data["cat_id"];
@@ -75,12 +76,12 @@
 						-->
 						
                     	<?php
-							$category_sub = mysqli_query($c,"select * from category_sub where p_id=0 order by cat_order");
+							$category_sub = mysqli_query($c,"select * from category_sub where p_id=$root_category order by cat_order");
 							while($category_sub_data = mysqli_fetch_array($category_sub))
 							{
 								$category_sub_cat_id = $category_sub_data["cat_id"];
 								
-								$category = mysqli_query($c,"select * from category where cat_id=$category_sub_cat_id AND status='Active'");
+								$category = mysqli_query($c,"select * from category where cat_id=$category_sub_cat_id");
 								while($category_data = mysqli_fetch_array($category))
 								{
 										$cat_name = $category_data["cat_name"];

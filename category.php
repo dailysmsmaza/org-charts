@@ -87,7 +87,7 @@
 
 						$sub_category_pid = $sub_category_data["cat_id"];
 	
-						$category = mysqli_query($c,"select * from category where cat_id='$sub_category_pid' && status='Active' order by cat_order");
+						$category = mysqli_query($c,"select * from category where cat_id='$sub_category_pid' order by cat_order");
 						while($category_data = mysqli_fetch_array($category))
 						{
 							$cat_id = $category_data["cat_id"];

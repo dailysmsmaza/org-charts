@@ -1,7 +1,7 @@
 <?php
 	
 	//LOCAL DB
-	//$c = mysqli_connect('localhost','root','','dailysmsmaza') or die("Connection Error");
+	// $c = mysqli_connect('localhost','root','','dailysmsmaza') or die("Connection Error");
 	
 	//LIVE DB
 	$c = mysqli_connect('localhost','hurvotmy_dsmadmin','xB@U&1g&T&AU','hurvotmy_dailysmsmaza') or die("Connection Error");
