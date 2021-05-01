@@ -10,9 +10,9 @@
 // $s_name = "daily_sms_user_name";
 
 // LIVE
-$title = "Daily SMS Maza";	// Daily SMS Maza
-$site = "dailysmsmaza.com";	// www.dailysmsmaza.com
-$url = "https://dailysmsmaza.com";	//http://www.dailysmsmaza.com
+$title = "Daily English Quotes";	// Daily SMS Maza
+$site = "dailyenglishquotes.com";	// www.dailysmsmaza.com
+$url = "https://dailyenglishquotes.com";	//http://www.dailysmsmaza.com
 
 $ip_address = $_SERVER['REMOTE_ADDR'];
 
