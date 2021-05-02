@@ -2,7 +2,7 @@
 
 		include("names.php");
 		include("header.php");
-		// require("connect.php");
+		require("connect.php");
 		include_once("counter.php");
 			
 		$id = $_GET["c_id"];

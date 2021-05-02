@@ -7,7 +7,7 @@ include_once("names.php");
 
 define("DEBUG", "debug");
 define("PRODUCTION", "production");
-define("CURRENT_MODE", PRODUCTION);
+define("CURRENT_MODE", DEBUG);
 
 ?>
 
