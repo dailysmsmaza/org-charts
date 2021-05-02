@@ -172,7 +172,7 @@ $adDisplay = 0;
 
 				}*/
 
-		$sub_message = mysqli_query($c, "select * from message_sub where cat_id IN('$ids') LIMIT $start,$limit");
+		$sub_message = mysqli_query($c, "select * from message_sub where cat_id IN('$ids') LIMIT $start,$limit order by id desc");
 		while ($sub_message_data = mysqli_fetch_array($sub_message)) {
 
 			$sub_message_sms_id = $sub_message_data["sms_id"];

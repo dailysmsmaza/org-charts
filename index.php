@@ -205,12 +205,12 @@ $adDisplay = 0;
 			$msg = mysqli_query($c,"select * from message where status='Active' order by id desc LIMIT $start,$limit");
 		}*/
 
-		$sub_message = mysqli_query($c, "select * from message_sub where cat_id IN('$ids') LIMIT $start,$limit");
+		$sub_message = mysqli_query($c, "select * from message_sub where cat_id IN('$ids') LIMIT $start,$limit order by id desc");
 		while ($sub_message_data = mysqli_fetch_array($sub_message)) {
-			
+
 			$sub_message_sms_id = $sub_message_data["sms_id"];
-							
-			$msg = mysqli_query($c, "select * from message where id='".$sub_message_sms_id."'");
+
+			$msg = mysqli_query($c, "select * from message where id='" . $sub_message_sms_id . "'");
 
 			while ($msg_data = mysqli_fetch_array($msg)) {
 				/*if($adDisplay%3==0 && $adDisplay!=0){

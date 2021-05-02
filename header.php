@@ -161,7 +161,7 @@ include_once("names.php");
     <div class="container visible-lg">
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-                <li> <a href="<?php echo $url; ?>/last/updated/sms/new2old/page/1" class="list-group-item"> Last / Latest Updated Sms </a> </li>
+                <!-- <li> <a href="<?php echo $url; ?>/last/updated/sms/new2old/page/1" class="list-group-item"> Last / Latest Updated Sms </a> </li> -->
                 <!-- <li> <a href="<?php echo $url; ?>/popular/most/sms/new2old/page/1" class="list-group-item"> Popular Sms </a> </li> -->
                 <!-- <li> <a href="<?php echo $url; ?>/top/user/page/1" class="list-group-item"> Top User </a> </li> -->
                 <!-- <li> <a href="#" class="list-group-item"> Add Your Sms </a> </li> -->
