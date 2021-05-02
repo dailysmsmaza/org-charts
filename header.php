@@ -1,7 +1,7 @@
 <?php
-ob_end_flush();
-ob_start();
-session_start();
+// ob_end_flush();
+// ob_start();
+// session_start();
 
 include_once("names.php");
 
@@ -52,10 +52,10 @@ include_once("names.php");
 
     <?php include_once("analyticstracking.php"); ?>
 
-    <?php
-    if (isset($_SESSION[$s_name])) {
-        $username = $_SESSION[$s_name];
-    ?>
+    <!-- <?php
+            if (isset($_SESSION[$s_name])) {
+                $username = $_SESSION[$s_name];
+            ?>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -84,7 +84,7 @@ include_once("names.php");
 
 
     <?php
-    } else {
+            } else {
     ?>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -111,9 +111,30 @@ include_once("names.php");
         </nav>
 
     <?php
-    }
-    ?>
+            }
+    ?> -->
 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="<?php echo $url; ?>" class="navbar-brand"><span class="glyphicon glyphicon-home"> </span> &nbsp; <?php echo $title; ?> </a>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li> <a href="<?= $url ?>/disclaimerisc"><span class="glyphicon glyphicon-book"></span> Disclaimer </a> </li>
+                        <li> <a href="mailto:dailysmsmaza@gmail.com"><span class="glyphicon glyphicon-book"></span> Contact Us </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
 
     <div class="container">
         <form class="navbar-form navbar-right" method="POST">

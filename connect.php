@@ -8,5 +8,3 @@
 	
 	mysqli_query($c,"SET NAMES 'utf8mb4'"); 
 	//mysqli_set_charset($c,"SET NAMES 'utf8mb4'");
-	
-?>
