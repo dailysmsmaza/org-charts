@@ -12,7 +12,7 @@
 // LIVE
 $title = "Daily English Quotes";	// Daily SMS Maza
 $site = "dailyenglishquotes.com";	// www.dailysmsmaza.com
-$url = "https://dailyenglishquotes.com";	//http://www.dailysmsmaza.com
+$url = "https://www.dailyenglishquotes.com";	//http://www.dailysmsmaza.com
 
 $ip_address = $_SERVER['REMOTE_ADDR'];
 
