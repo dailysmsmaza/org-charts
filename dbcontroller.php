@@ -1,10 +1,18 @@
 <?php
 class DBController {
 
+	// private $host = "localhost";
+	// private $user = "root";
+	// private $password = "";
+	// private $database = "dailysmsmaza";
+	
+
 	private $host = "localhost";
-	private $user = "root";
-	private $password = "";
-	private $database = "dailysmsmaza";
+	private $user = "hurvotmy_dsmadmin";
+	private $password = "xB@U&1g&T&AU";
+	private $database = "hurvotmy_dailysmsmaza";
+
+
 	var $conn;
 
 	function __construct() {
