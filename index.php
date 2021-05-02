@@ -205,7 +205,7 @@ $adDisplay = 0;
 			$msg = mysqli_query($c,"select * from message where status='Active' order by id desc LIMIT $start,$limit");
 		}*/
 
-		$sub_message = mysqli_query($c, "select * from message_sub where cat_id IN('$ids') LIMIT $start,$limit order by id desc");
+		$sub_message = mysqli_query($c, "select * from message_sub where cat_id IN('$ids') order by id desc LIMIT $start,$limit");
 		while ($sub_message_data = mysqli_fetch_array($sub_message)) {
 
 			$sub_message_sms_id = $sub_message_data["sms_id"];

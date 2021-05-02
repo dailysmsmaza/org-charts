@@ -1,52 +1,65 @@
 <?php
-class DBController {
+class DBController
+{
 
-	// private $host = "localhost";
-	// private $user = "root";
-	// private $password = "";
-	// private $database = "dailysmsmaza";
-	
+	public $host = "";
+	public $user = "";
+	public $password = "";
+	public $database = "";
 
-	private $host = "localhost";
-	private $user = "hurvotmy_dsmadmin";
-	private $password = "xB@U&1g&T&AU";
-	private $database = "hurvotmy_dailysmsmaza";
+	public $conn;
 
+	function __construct($CURRENT_MODE, $PRODUCTION)
+	{
+		
 
-	var $conn;
-
-	function __construct() {
-		$this->conn = $this->connectDB();
+		$this->conn = $this->connectDB($CURRENT_MODE, $PRODUCTION);
 		/*if(!empty($conn)) {
 			$this->selectDB($conn);
 		}*/
 	}
-	
-	function connectDB() {
-		$this->conn = mysqli_connect($this->host,$this->user,$this->password, $this->database);
+
+	public function connectDB($CURRENT_MODE, $PRODUCTION)
+	{
+		if ($CURRENT_MODE == $PRODUCTION) {
+			$this->host = "localhost";
+			$this->user = "hurvotmy_dsmadmin";
+			$this->password = "xB@U&1g&T&AU";
+			$this->database = "hurvotmy_dailysmsmaza";
+		} else {
+			$this->host = "localhost";
+			$this->user = "root";
+			$this->password = "";
+			$this->database = "dailysmsmaza";
+		}
+		$this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->database);
 		return $this->conn;
 	}
-	
-	function selectDB($conn) {
-		mysql_select_db($this->database,$conn);
+
+	function selectDB($conn)
+	{
+		mysql_select_db($this->database, $conn);
 	}
-	
-	function runQuery($query) {
+
+	function runQuery($query)
+	{
 		$result = mysql_query($query);
-		while($row=mysql_fetch_assoc($result)) {
+		while ($row = mysql_fetch_assoc($result)) {
 			$resultset[] = $row;
-		}		
-		if(!empty($resultset))
+		}
+		if (!empty($resultset))
 			return $resultset;
 	}
-	
-	function numRows($query) {
+
+	function numRows($query)
+	{
 		$result  = mysqli_query($this->conn, $query);
 		$rowcount = mysqli_num_rows($result);
-		return $rowcount;	
+		return $rowcount;
 	}
-	
-	function updateQuery($query) {
+
+	function updateQuery($query)
+	{
 		$result = mysql_query($query);
 		if (!$result) {
 			die('Invalid query: ' . mysql_error());
@@ -54,8 +67,9 @@ class DBController {
 			return $result;
 		}
 	}
-	
-	function insertQuery($query) {
+
+	function insertQuery($query)
+	{
 		$result = mysql_query($query);
 		if (!$result) {
 			die('Invalid query: ' . mysql_error());
@@ -63,8 +77,9 @@ class DBController {
 			return $result;
 		}
 	}
-	
-	function deleteQuery($query) {
+
+	function deleteQuery($query)
+	{
 		$result = mysql_query($query);
 		if (!$result) {
 			die('Invalid query: ' . mysql_error());
@@ -73,4 +88,3 @@ class DBController {
 		}
 	}
 }
-?>
