@@ -105,7 +105,7 @@ $adDisplay = 0;
 
 	<script src="dist/clipboard.min.js"></script>
 
-	<div class="visible-md visible-sm visible-xs">
+	<!-- <div class="visible-md visible-sm visible-xs">
 
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
@@ -129,7 +129,7 @@ $adDisplay = 0;
 				</div>
 			</div>
 		</nav>
-	</div>
+	</div> -->
 
 
 	<?php include("category_menu_pc.php"); ?>
