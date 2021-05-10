@@ -2,6 +2,7 @@
 
 set_time_limit(0);
 
+require_once("header.php");
 require_once("connect.php");
 include("counter.php");
 
