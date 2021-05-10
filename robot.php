@@ -20,6 +20,12 @@
 <?php
 
 if (isset($_POST["submit"])) {
+
+	
+define("DEBUG", "debug");
+define("PRODUCTION", "production");
+define("CURRENT_MODE", PRODUCTION);
+
 	require("connect.php");
 	include('Emoji.class.php');
 
