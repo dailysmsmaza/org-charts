@@ -22,7 +22,7 @@ for($i=1729;$i<=5197;$i++){
         //echo $one_sms_category_all_sms = $one_sms_category_data["all_sms"];
 
         $id = $one_sms_category_data["cat_id"];
-		echo $name = $one_sms_category_data["cat_name"] + "</br>";
+		echo $name = $one_sms_category_data["cat_name"] . "</br>";
 
 		$cha_pid = "225";
 		// $category_upd = mysqli_query($c,"update category_sub set p_id=$cha_pid where cat_id=$id");
