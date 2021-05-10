@@ -24,9 +24,9 @@ for($i=1729;$i<=5197;$i++){
         $id = $one_sms_category_data["cat_id"];
 		echo $name = $one_sms_category_data["cat_name"] . "</br>";
 
-		$cha_pid = "225";
-		// $category_upd = mysqli_query($c,"update category_sub set p_id=$cha_pid where cat_id=$id");
-		// $category_upd = mysqli_query($c,"update category set p_id=$cha_pid where cat_id=$id");
+		$cha_pid = "224";
+		$category_upd = mysqli_query($c,"update category_sub set p_id=$cha_pid where cat_id=$id");
+		$category_upd = mysqli_query($c,"update category set p_id=$cha_pid where cat_id=$id");
 	}
 }
 
