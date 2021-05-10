@@ -79,7 +79,7 @@ define("CURRENT_MODE", PRODUCTION);
 				}
 
 
-				$status = "Deactive";
+				$status_value = "Deactive";
 				$date = strtotime("now");
 
 				//$sms = str_replace(array("\r\n", "\r", "\n"), "<br />", $sms); 
@@ -119,7 +119,7 @@ define("CURRENT_MODE", PRODUCTION);
 						} else {
 							$p_id = 225;
 						}
-						$cat_insert = mysqli_query($c, "insert into category(`cat_name`,`cat_title`,`status`,`p_id`)values('$cat_name','$cat_name',$status, '$p_id')") or die(mysqli_error($c));
+						$cat_insert = mysqli_query($c, "insert into category(`cat_name`,`cat_title`,`status`,`p_id`)values('$cat_name','$cat_name','$status_value', '$p_id')") or die(mysqli_error($c));
 						if (mysqli_query($c, $cat_insert)); {
 							$last_cat_id = mysqli_insert_id($c);
 							$cat_sub_insert = mysqli_query($c, "insert into category_sub (`cat_id`,`cat_name`,`cat_order`,`p_id`)values('$last_cat_id','$cat_name','$last_cat_id', '$p_id')") or die(mysqli_error($c));
@@ -151,7 +151,7 @@ define("CURRENT_MODE", PRODUCTION);
 				mysqli_query($c, "SET NAMES 'utf8'");
 				mysqli_set_charset($c, "utf8");
 
-				$msg_insert = mysqli_query($c, "insert into message(sms,date,status,user_id) VALUES ('$sms','$date','$status','$user_id')") or die(mysqli_error($c));
+				$msg_insert = mysqli_query($c, "insert into message(sms,date,status,user_id) VALUES ('$sms','$date','$status_value','$user_id')") or die(mysqli_error($c));
 
 				$sms_id = mysqli_insert_id($c);
 
