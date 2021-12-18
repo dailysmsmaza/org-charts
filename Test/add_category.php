@@ -21,7 +21,7 @@ if(isset($_GET["id"]))
 	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>	
 	
-	<title> Add Category :: <?=$title?> : Admin Panel </title>
+	<title> Add Category Here :: <?=$title?> : Admin Panel </title>
 
 	 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/css/w3.css" rel="stylesheet">
