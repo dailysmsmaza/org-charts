@@ -1,0 +1,102 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2020-09-12 09:37:17 --> 404 Page Not Found: Assets/css
+ERROR - 2020-09-12 09:37:34 --> 404 Page Not Found: Assets/css
+ERROR - 2020-09-12 09:43:57 --> 404 Page Not Found: Assets/css
+ERROR - 2020-09-12 11:14:20 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() D:\xampp\htdocs\orgchart\system\libraries\Email.php 1902
+ERROR - 2020-09-12 12:47:34 --> Severity: Warning --> mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() D:\xampp\htdocs\orgchart\system\libraries\Email.php 1902
+ERROR - 2020-09-12 12:47:59 --> Severity: Warning --> Illegal string offset 'user_id' D:\xampp\htdocs\orgchart\application\views\admin\department\add_edit_department.php 150
+ERROR - 2020-09-12 12:47:59 --> Severity: Notice --> Uninitialized string offset: 0 D:\xampp\htdocs\orgchart\application\views\admin\department\add_edit_department.php 150
+ERROR - 2020-09-12 12:48:58 --> Severity: Notice --> Undefined index: user_id D:\xampp\htdocs\orgchart\application\views\admin\department\add_edit_department.php 150
+ERROR - 2020-09-12 12:49:13 --> Severity: Notice --> Undefined variable: edit_department D:\xampp\htdocs\orgchart\application\views\admin\department\add_edit_subteam.php 147
+ERROR - 2020-09-12 12:50:20 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:25 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:26 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:56 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:57 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:57 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:57 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:57 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:58 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:50:58 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 12:51:06 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:15 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:16 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:17 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:17 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:49 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:49 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:57 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:58 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:58 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:43:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:44:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:50:02 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:50:02 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:50:03 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:50:03 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:50:03 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:08 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:08 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:09 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:26 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:26 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:28 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:28 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:28 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:28 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:45 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:45 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:46 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:51 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:51 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:51 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:51:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:00 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:01 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:01 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:09 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:09 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:09 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:52:59 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:01 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:01 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:02 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:22 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:22 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:25 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:25 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:30 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:30 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:30 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:30 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:31 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:31 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:32 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:32 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:33 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:44 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:44 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:53:44 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:02 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:02 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:47 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:48 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:48 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:49 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:49 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 13:54:50 --> 404 Page Not Found: Assets/userimage
+ERROR - 2020-09-12 14:17:38 --> Severity: Notice --> Undefined index: user_id D:\xampp\htdocs\orgchart\application\views\admin\department\add_edit_department.php 150

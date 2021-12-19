@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="images/favicon.png">
+  <title>Org Chart Dashboard</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/fontawesome.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/responsive.css" rel="stylesheet">
+</head>
+<body>
+<!-- header start -->
+
+<div class="header">
+    <div class="header-content smootheffect">
+      <div class="brandlogo smootheffect">
+          <a href=""><img src="images/logo.png" alt="" /></a>
+      </div>
+      
+      <div class="menuicon smootheffect">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="mobilelogo"><img src="images/logo.png" alt="" /></div>
+      <div class="userinfo">
+          <a href="">Welcome Admin</a>
+      </div> 
+
+    </div>
+</div>
+<div class="sidebar smootheffect">
+    <ul>
+        <li class="active"><a href="dashboard.html"><i class="fa fa-home"></i><span>Dashboard</span></a></li>
+        <li><a href="userlist.html"><i class="fa fa-list-ul"></i>User List</a></li>
+        <li><a href="employee.html"><i class="fa fa-users"></i>Employee</a></li>
+        <li><a href="setting.html"><i class="fa fa-gear"></i>Setting</a></li>
+        <li><a href="indeex.html"><i class="fa fa-power-off"></i>Logout</a></li>
+    </ul>
+</div>
+<div class="maincontentarea smootheffect">
+    <div class="pageconent">
+        <div class="pageconentbx">
+          <h2>Dashboard</h2>
+          <div class="whitebox">
+              <h4>Welcome Back Admin</h4>
+          </div>
+        </div>
+    </div>
+</div>
+
+<!-- footer start -->
+  <footer class="footer afterloginfooter smootheffect">
+      <div class="copyright">Copyright ©  2020 Org Chart. All rights reserved.</div>
+</footer>
+<!-- footer over -->
+
+<script src="js/jquery-3.2.1.min.js"></script> 
+<script src="js/bootstrap.js"></script> 
+<script>
+    $(function(){
+        $(".menuicon").click(function(e) {
+          $(this).toggleClass("active");
+          $(".sidebar").toggleClass("hidesidebar");
+          $(".brandlogo").toggleClass("hidebrand");
+          $(".maincontentarea").toggleClass("fullmaincontent");
+          $(".footer").toggleClass("fullfooter");
+        });
+    });
+  </script>
+</body>
+</html>

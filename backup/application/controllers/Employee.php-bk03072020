@@ -1,0 +1,441 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Employee extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model("employee_model");
+        $this->load->library('form_validation');
+        $this->load->helper("inflector");
+        $this->load->helper("text");
+        $this->load->helper("url");
+        $this->load->library('pagination');
+        if ($this->session->userdata('id') == "") {
+            redirect("login");
+        }
+    }
+
+    /**
+     * Empployee List
+     */
+    public function index() {
+        $data["page_title"] = "ORG Chart | Employee";
+        $data["heading_title"] = "Employee List";
+        $this->load->view("admin/include/header", $data);
+
+        $page_num = "";
+        $condition = "";
+        
+        $company =  $this->session->userdata("id");//isset($_GET["company"]) ? $_GET["company"] : "";
+        $search = isset($_GET["search"]) ? $_GET["search"] : "";
+        $config['per_page'] = 20;
+        $config['use_page_numbers'] = TRUE;
+
+        $page_num = ($this->uri->segment(3)!="") ? $this->uri->segment(3) : "0";
+            
+        $condition = " where company='$company' and role=3 and is_delete=0";
+        $config['base_url'] = base_url('/employee/index');
+        $config['total_rows'] = get_totalnumber_of_rows("user_master",$condition);   
+        $data["total_employee"] =  get_totalnumber_of_rows("user_master",$condition);   
+
+      
+        $data["employee_list"] = $this->employee_model->get_employee_list($search,$company, $config["per_page"], $page_num);
+        $data["company"] = $this->employee_model->get_company_list();
+        $this->pagination->initialize($config);
+        $this->load->view('admin/employee/employee_list', $data);
+        $this->load->view("admin/include/footer");
+    }
+
+
+    /*
+     * Add Empployee
+     */
+    public function add_employee() {
+        $data["page_title"] = "ORG Chart | Add Employee";
+        $companyid = $this->session->userdata("id");
+        $company   =  get_userinfo($companyid,"first_name","last_name");
+        $data["heading_title"] = "Add Employee ".$company["first_name"]." ".$company["last_name"];
+        $this->load->view("admin/include/header",$data);        
+        
+        if (empty($_FILES["user_image"]["name"])) {
+            $this->form_validation->set_rules('user_image', 'User Image', 'required');
+        }
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');        
+        
+        $this->form_validation->set_rules("phone", "Phone", "");
+        $this->form_validation->set_rules("designation", "Designation", "required");
+        
+        $this->form_validation->set_rules("skill", "Skill", "");
+        $this->form_validation->set_rules("city", "City", "");
+        $this->form_validation->set_rules("department_id", "Department", "");
+        $this->form_validation->set_rules("start_date", "Start Date", "");
+
+        if ($this->form_validation->run()) {
+            if (!empty($_FILES["user_image"]["name"])) {
+                $filename = underscore(date("dmY_his") . '_' . $_FILES["user_image"]["name"]);
+                $res = $this->do_upload('user_image', $filename, 'assets/userimage/', 'jpg|jpeg|png');
+            } else {
+                $filename = '';
+            }
+
+            $role = 3;
+            $company = $this->session->userdata("id");
+            $first_name = $this->input->post("first_name");
+            $last_name = $this->input->post("last_name");
+            $email = $this->input->post("email");
+            $phone = $this->input->post("phone");
+            $designation = $this->input->post("designation");
+            $about = $this->input->post("about");
+            $skill = $this->input->post("skill");
+            $city = $this->input->post("city");
+            $department_id = $this->input->post("department_id");
+            $start_date = $this->input->post("start_date");
+            $start_date = ($start_date)?date('Y-m-d', strtotime($start_date)):'';
+            $parent_employee = $this->input->post("parent_employee"); 
+            $error = 0;          
+
+            $exist_email = checkcolunm_exist("user_master", "email", $email);
+           
+            if ($exist_email) {
+                $this->session->set_flashdata("fail", "Email Already Exist");
+                //redirect("employee/add_employee");
+                $error = 1;
+            }
+
+            if($error == 0){
+                $data = array('role' => $role, 'company' => $company, "user_image" => $filename, 'first_name' => $first_name, 'last_name' => $last_name, 'email' => $email, 'phone' => $phone, 'designation' => $designation, 'about' => $about, 'skill' => $skill, 'city' => $city, 'department_id' => $department_id, 'start_date' => $start_date);
+                $result = $this->employee_model->insert($data);
+
+                if ($result) {
+                    $insertid = $this->db->insert_id();
+                    if($insertid){
+                        if($parent_employee){
+                            $query = $this->db->query('SELECT * FROM employee_short WHERE item_id = '.$parent_employee);
+                            $row = $query->row();
+                            $cdata = array('company_id' => $companyid, 'item_id' => $insertid, 'parent_id' => $parent_employee,'depth' => ($row)?($row->depth + 1):1);
+                            $this->db->insert("employee_short",$cdata);
+                        }
+                    }
+
+                    $this->session->set_flashdata("success", "Empployee Add Successfully");
+                    redirect("employee");
+                } else {
+                    $this->session->set_flashdata("fail", "Empployee Not  Add Successfully");
+                    //redirect("employee/add_employee");
+                }
+            }
+        }
+        $this->load->view('admin/employee/add_employee', $data);
+        $this->load->view('admin/include/footer');
+    }
+
+    /*
+     * Edit Empployee
+     */
+    public function edit($id) {
+        $data["page_title"] = "ORG Chart | Edit Employee";
+        $data["heading_title"] = " Edit Employee";
+        $companyid = $this->session->userdata("id");
+        $this->load->view("admin/include/header", $data);        
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules("phone", "Phone", "");
+        $this->form_validation->set_rules("designation", "Designation", "required");
+        $this->form_validation->set_rules("skill", "Skill", "");
+        $this->form_validation->set_rules("city", "City", "");
+        $this->form_validation->set_rules("department_id", "Department", "");
+        $this->form_validation->set_rules("start_date", "Start Date", "");
+
+        if ($this->form_validation->run() == FALSE) {
+        } else {
+
+            if (!empty($_FILES["user_image"]["name"])) {
+
+                $filename = underscore(date("dmY_his") . '_' . $_FILES["user_image"]["name"]);
+
+                $res = $this->do_upload('user_image', $filename, 'assets/userimage/', 'jpg|jpeg|png');
+
+            } else {
+
+                $filename = $this->input->post("old_user_image");
+
+            }
+
+            $company = $this->session->userdata("id");
+            $first_name = $this->input->post("first_name");
+            $last_name = $this->input->post("last_name");
+            $email = $this->input->post("email");
+            $phone = $this->input->post("phone");
+            $designation = $this->input->post("designation");
+            $about = $this->input->post("about");
+            $skill = $this->input->post("skill");
+            $city = $this->input->post("city");
+            $parent_employee = $this->input->post("parent_employee"); 
+            $department_id = $this->input->post("department_id");
+            $start_date = $this->input->post("start_date");
+            $start_date = ($start_date)?date('Y-m-d', strtotime($start_date)):'';
+            $error = 0;            
+
+            /* Check Email Exist */
+
+            $query = $this->db->query("Select id,email from user_master");
+            $res = $query->result_array();
+            $no = $query->num_rows();
+            if ($res) {
+
+                foreach ($res as $key => $value) {
+                    if ($value["id"] != $id) {
+                        if ($email == $value['email']) {
+                            $this->session->set_flashdata("fail", "Email Already Exist");
+                            //redirect("employee/edit/" . $id);
+                            $error = 1;
+                        }
+                    }
+                }
+            }
+
+            if($error == 0){
+                $data = array('company' => $company, "user_image" => $filename, 'first_name' => $first_name, 'last_name' => $last_name,'email' => $email, 'phone' => $phone, 'designation' => $designation, 'about' => $about, 'skill' => $skill, 'city' => $city, 'department_id' => $department_id, 'start_date' => $start_date);
+        
+                $result = $this->employee_model->update($data, $id);
+    
+                if ($result) {
+
+                    if($parent_employee){
+                        $query = $this->db->query('SELECT * FROM employee_short WHERE item_id = '.$parent_employee);
+                        $row = $query->row();
+
+                        $equery = $this->db->query('SELECT * FROM employee_short WHERE item_id = '.$id);
+                        $erow = $equery->row();                        
+
+                        $edepth = ($erow)?$erow->depth:1;
+                        $depth = ($row)?($row->depth + 1):$edepth;
+                        $cdata = array('company_id' => $companyid, 'item_id' => $id, 'parent_id' => $parent_employee,'depth' => $depth);
+                       
+                        if($erow){
+                            $this->db->where("id", $erow->id);
+                            $this->db->update("employee_short",$cdata);
+                        }else{
+                            $this->db->insert("employee_short",$cdata);
+                        } 
+                    }
+    
+                    $this->session->set_flashdata("success", "Empployee Update Successfully");
+    
+                    redirect("employee");
+    
+                } else {
+    
+                    $this->session->set_flashdata("fail", "Empployee Not  Update Successfully");
+    
+                    //redirect("employee/edit");
+    
+                }
+            }
+
+        }
+
+        $data["edit_employee"] = $this->employee_model->edit($id);
+
+        $this->load->view('admin/employee/edit_employee', $data);
+
+        $this->load->view("admin/include/footer");
+
+    }
+
+
+
+    /*
+
+     * Change Status
+
+     */
+
+
+
+    public function changestatus($status, $id) {
+
+        $data = array('status' => $status);
+
+        $result = $this->employee_model->changestatus($data, $id);
+
+        if ($result) {
+
+            $this->session->set_flashdata("success", "Empployee Status Update Successfully");
+
+            redirect("employee");
+
+        } else {
+
+            $this->session->set_flashdata("fail", "Empployee Status Not  Update Successfully");
+
+            redirect("employee");
+
+        }
+
+    }
+
+
+
+    /*
+
+     * Delete Employee
+
+     */
+
+
+
+    public function delete($id) {
+
+        $data = array('is_delete' => 1);
+
+        $result = $this->employee_model->delete($id);
+
+        if ($result) {
+
+            $this->session->set_flashdata("success", "Empployee Delete Successfully");
+
+            redirect("employee");
+
+        } else {
+
+            $this->session->set_flashdata("fail", "Empployee Not  Delete Successfully");
+
+            redirect("employee");
+
+        }
+
+    }
+
+
+
+    /*
+
+     * Image Upload Do Upload
+
+     */
+
+
+
+    function do_upload($control, $filename, $upload_path, $file_format) {
+
+        $config['upload_path'] = $upload_path;
+
+        $config['file_name'] = $filename;
+
+        $config['allowed_types'] = $file_format;
+
+        $config['remove_spaces'] = FALSE;
+
+        $config['max_size'] = '0';
+
+        $this->load->library('upload', $config);
+
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload($control)) {
+
+            echo $this->upload->display_errors();
+
+            return FALSE;
+
+        } else {
+
+            return TRUE;
+
+        }
+
+    }
+
+    
+
+      /* ****/
+
+    public function create_orgchart() {
+        $role = $this->session->userdata('role');
+        if($role != 2){ redirect(base_url()); }
+
+        $companyid = $this->session->userdata("id");
+        $usersq = $this->db->query("SELECT id,user_name FROM user_master WHERE CEO = 1 AND company = '".$companyid."'");
+        if($usersq->num_rows() == 0){ redirect(base_url('employee')); }
+
+        $data["page_title"] = "ORG Chart | Create ORG Chart";
+        //$this->load->view("admin/include/header",$data);
+        $this->load->view('admin/employee/create_orgchart', $data);
+        //$this->load->view('admin/include/footer');
+
+    }
+
+    
+
+    public function save_sorting(){
+
+        $employees = $this->input->post('data');
+
+        $company = $this->session->userdata('id'); $role = 3;
+
+        $this->db->where('company_id', $company);
+
+        $this->db->delete('employee_short');
+
+
+
+        $i=0;
+
+        foreach ($employees as $user) {
+
+            if($i != 0){
+
+                $data = array('company_id' => $company, 'item_id' => $user['item_id'], 'parent_id' => $user['parent_id'], 'depth' => $user['depth']);
+
+                $result = $this->db->insert('employee_short', $data);
+
+            }
+
+            $i++;
+
+        }
+
+    }
+    
+    public function save_ceo(){
+        $employee = $this->input->post('id');
+        $company = $this->session->userdata('id');
+
+        $this->db->where('company', $company);
+        $this->db->update('user_master', array('ceo' => 0));
+
+        $this->db->where("item_id",$employee);
+        $sql = $this->db->delete("employee_short");
+
+        $this->db->where('id', $employee);
+        $this->db->update('user_master', array('ceo' => 1));
+    }
+
+    public function save_orgchart(){
+        $userid = $this->input->post('userid');
+        $parentid = $this->input->post('parentid');
+        $company = $this->session->userdata('id');
+
+        $query = $this->db->query("SELECT * FROM user_master WHERE id = ".$parentid);
+        $userinfo = $query->row();
+
+        $query = $this->db->query("SELECT * FROM employee_short WHERE item_id = ".$parentid);
+        $parent = $query->row();
+
+        $query = $this->db->query("SELECT * FROM employee_short WHERE item_id = ".$userid);
+        $current = $query->row();
+
+        $data = array('company_id' => $company, 'item_id' => $userid, 'parent_id' => ($userinfo->ceo)?0:$parentid, 'depth' => ($parent)?($parent->depth + 1):1);
+        if($current){
+            $this->db->where('item_id', $userid);
+            $this->db->update('employee_short', $data);
+        }else{
+            $result = $this->db->insert('employee_short', $data);
+        }
+
+        return $data;
+    }
+}
+

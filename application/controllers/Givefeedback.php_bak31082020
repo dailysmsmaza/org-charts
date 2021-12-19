@@ -1,0 +1,32 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Givefeedback extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->helper("form");
+        $this->load->library('form_validation');
+        $this->load->helper("inflector");
+        $this->load->helper("text");
+        $this->load->helper("url");     
+        $this->load->library('pagination');        
+     
+    }
+
+    /**
+     * User List
+     */
+    public function index() {
+        $data["page_title"] = "ORG Chart | Feedback";
+        $data["heading_title"] = "Feedback List";
+        $this->load->view("admin/include/header",$data);
+        //$this->load->view('admin/feedback/givefeedback_list', $data);
+        $this->load->view("admin/include/footer");
+    }
+    
+
+    
+
+}

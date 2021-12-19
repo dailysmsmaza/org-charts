@@ -1,0 +1,115 @@
+<div class="maincontentarea smootheffect">
+    <div class="pageconent">
+        <div class="pageconentbx">
+                <div class="pageheding">
+                  <h2><?php echo $heading_title ?></h2>             
+                  <div class="addbtn adduser"><a href="<?php echo base_url('requestfeedback/send_requestfeedbacks') ?>"><span class="plusicon"><img src="<?php echo base_url('assets/') ?>images/plusicon.png" alt="" /></span>Send Request Feedabck</a></div>
+                </div>
+                <?php if ($this->session->flashdata("success")) { ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong><i class="fa fa-times-circle" aria-hidden="true"></i></i></strong> <?php echo $this->session->flashdata("success"); ?>
+            </div>
+        <?php } ?>  
+        <?php if ($this->session->flashdata("fail")) { ?>
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong><i class="fa fa-times-circle" aria-hidden="true"></i></i></strong> <?php echo $this->session->flashdata("fail"); ?>
+            </div>
+        <?php } ?>  
+                <div class="whitebox">
+                  <div class="tablesearch">   
+
+                      <form method="GET" action="<?php echo base_url('requestfeedback/index/') ?>" class="tablesearchform">                         
+                          <input type="text" name="search" placeholder="Search" required="" class="form-control" value="<?php echo isset($_GET["search"]) ? $_GET["search"] : '' ; ?>">                           
+                          <input  type="submit"  value="Search" class="inpbtn">
+                          <a href="<?php echo base_url('requestfeedback') ?>" class="inpbtn">Reset</a>  
+                      </form>                                    
+                  </div>     
+                  <div class=""></div>
+                    <table  class="mobiletable userslist-table">            
+                      <thead>
+                          <tr>                              
+                              <th>From</th>
+                              <th>Subject</th>
+                              <th>Message</th>
+                              <th>To</th>
+                              <th>Status</th>
+                              <th>Action</th> 
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                          if (!empty($feedbacks)) {
+                              foreach ($feedbacks as $feedbacks_value) {
+                                  ?>
+                                    <?php
+
+                                          $userid =  $feedbacks_value["reqfd_id"];
+                                          $reqfdto= $feedbacks_value["reqfd_userto"];
+                                          $reqfdfrom= $feedbacks_value["reqfd_userfrom"];
+                                          $username = ''; $num = 0;
+                                          if($userid){
+                                            $username = get_userinfo($userid, 'first_name', 'id');
+                                            $reqfdtofname = get_userinfo($reqfdto, 'first_name', 'id');
+                                            $reqfdfromfname = get_userinfo($reqfdfrom, 'first_name', 'id');
+                                              $username = ($username)?$username['first_name']:'';
+                                              $reqfdtofname = ($reqfdtofname)?$reqfdtofname['first_name']:'';
+                                              $reqfdfromfname = ($reqfdfromfname)?$reqfdfromfname['first_name']:'';
+                                              $query =  $this->db->query('SELECT * FROM requestfdbck_master WHERE reqfd_id = '.$userid);
+                                              $num = $query->num_rows();
+                                              
+                                          }
+
+
+                                          $status = "";
+                                          ($feedbacks_value["reqfd_status"] == 1) ? $status = 0 : $status = 1;
+                                       ?>
+                                  <tr>                                      
+                                      <td><?php echo $reqfdfromfname; ?></td>
+                                      <td><?php echo $feedbacks_value["reqfd_subject"]; ?></td>
+                                      <td><?php echo $feedbacks_value["reqfd_message"]; ?></td>
+                                      <td><?php echo $reqfdtofname; ?></td>
+                                      <td class="<?php echo ($feedbacks_value["reqfd_status"] == 1) ? 'activestatus' : 'deactivestatus' ?>"><?php echo ($feedbacks_value["reqfd_status"] == 1) ? "Active" : "Deactive" ?></td>
+                                      <td class="action-td">
+                                        
+                                          <a class="actionicon viewicon" href="<?php echo base_url('company/view_employee/'.$feedbacks_value['reqfd_id']) ?>" title="View Employee"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                          <a class="actionicon activeicon" href="<?php echo base_url('requestfeedback/changestatus/' . $status . '/' . $feedbacks_value['reqfd_id']) ?>"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                          <a class="actionicon editicon"  href="<?php echo base_url('requestfeedback/edit/' . $feedbacks_value['reqfd_id']) ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                          <a class="actionicon deleteicon show-alert" onclick="return confirm('Are You Sure Want To Delete This Record?')" href="<?php echo base_url('requestfeedback/delete/' . $feedbacks_value['reqfd_id']) ?>"><i class="fa fa-trash" aria-hidden="true" ></i></a>
+                                      </td>
+                                  </tr>
+                              <?php
+                                }
+                            } else {
+                              ?>
+                                <tr><td colspan="7">Not Data Found</td></tr>
+                        <?php } ?>
+                        <tr><td colspan="7">Total Record (s) : <?php echo $total_requestfeedback ?></td></tr>
+                    </tbody>
+                    </table>
+                <div class="pagination" style="margin-left:550px;">
+                 <?php echo $this->pagination->create_links(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="<?php echo base_url('assets/') ?>js/jquery.basictable.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+      $('.mobiletable').basictable({
+        breakpoint: 768
+      });
+  });
+</script>
+<script type="text/javascript">
+   setTimeout(function () {
+        $(".alert-danger").hide()
+    }, 3000);
+    setTimeout(function () {
+        $(".alert-success").hide()
+    }, 3000);
+</script>

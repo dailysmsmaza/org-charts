@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><?=$page_title;?></title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>/assets/chart/css/jquery.orgchart.css">
+    <link rel="stylesheet" href="<?=base_url();?>/assets/chart/css/style.css">
+    <link rel="stylesheet" href="<?=base_url();?>/assets/chart/css/sidebar.css">
+    <style type="text/css">h1 {color: #005ddb; font-size: 35px; } .center { position: absolute; height: 50px; top: 45%; left: 45%;  margin-left: -50px; /* margin is -0.5 * dimension */ margin-top: -25px; } .rightEdge, .leftEdge { display: none; }​ </style>
+</head>
+<body><?php
+/*$userid =  $this->session->userdata('id');
+
+$query1 = $this->db->query("SELECT um.id, um.first_name, um.last_name FROM user_master as um 
+                                    JOIN employee_short as es ON um.id = es.item_id 
+                                   WHERE um.status = 1 AND um.company = ".$userid." AND es.parent_id = 0 
+                                ORDER BY es.id ASC");
+$orgchartdata = array();
+foreach ($query1 as $data) {
+    
+}
+*/
+$chart = orgchart_tree(0);
+
+
+$username = $this->uri->segment(1);
+if($username){
+  $check = $this->db->query("SELECT id FROM user_master WHERE user_name = '".$username."'");
+  $row = $check->row();
+  if($row){
+      $userid =  $row->id;
+
+      $chartck = $this->db->query("SELECT * FROM user_master WHERE ceo = 1 AND company = '".$userid."'");
+      $ct = $chartck->row();
+      $image = ($ct->user_image)?'assets/userimage/'.$ct->user_image:'assets/images/user-profile.jpg';
+      $chart = array('id' => $ct->id, 'title' => $ct->first_name.' '.$ct->last_name, 'name' => $ct->designation, 'image' => base_url($image), 'relationship' => array('children_num' => 3), 'children' => $chart);
+
+      $query = $this->db->query("SELECT um.* 
+                                   FROM user_master as um 
+                                  WHERE um.status = 1 AND is_delete = 0 AND um.company = ".$userid);
+      
+      foreach ($query->result() as $res) {
+        $image = ($res->user_image)?'assets/userimage/'.$res->user_image:'assets/images/user-profile.jpg';
+        $id = $res->id;
+        $designation = $res->designation;
+        $username = $res->first_name.' '.$res->last_name;
+        $image = base_url($image);
+        $skills = (trim($res->skill))?explode(',', trim($res->skill)):'';
+        $abouts = (trim($res->about))?explode(',', trim($res->about)):'';
+        $start_date = (trim($res->start_date))?date('d M, Y', strtotime($res->start_date)):'';
+        $departmentname = '';
+        if($res->department_id){
+          $dquery = $this->db->query("SELECT * FROM department_master WHERE id = ".$res->department_id);
+          $drow = $dquery->row();
+          $departmentname = ($drow)?$drow->name:'';
+        } ?>
+        <div class="profile-sidebar" id="profile-sidebar-<?=$id;?>">
+          <div class="member-profile-wrap">
+              <div class="member-avtar">
+                  <img src="<?=$image;?>" alt="<?=$username;?>" />
+              </div>
+              <div class="member-detail">
+                  <h3><?=$username;?></h3>
+                  <h5><?=$designation;?></h5>
+              </div>
+          </div>
+          <div class="memeber-contact">
+              <h4>Contact</h4>
+              <!-- <div class="mem-cont-item"><img src="<?base_url('assets/chart/images/trophy.png');?>" alt="" />Started on March 10, 2017</div> --><?php
+              if($res->city){ ?>
+                <div class="mem-cont-item"><img src="<?=base_url('assets/chart/images/location.png');?>" alt="" /><?=$res->city;?></div><?php
+              }
+              if($res->email){ ?>
+                <div class="mem-cont-item"><img src="<?=base_url('assets/chart/images/email.png');?>" alt="" /><?=$res->email;?></div><?php
+              }
+              if($res->phone){ ?>
+                <div class="mem-cont-item"><img src="<?=base_url('assets/chart/images/phone.png');?>" alt="" /><?=$res->phone;?></div><?php
+              } ?>
+          </div><?php
+
+          if($departmentname){ ?>
+            <div class="memeber-about">
+              <h4>Department</h4>
+              <div class="mem-cont-item" style="padding-left: 15px;"><i class="fa fa-building-o" style="padding-right: 15px;"></i> <?=$departmentname;?></div>
+            </div><?php
+          }
+          
+          if($skills || $abouts || $start_date){ ?>
+            <div class="memeber-about">
+              <h4>About</h4><?php
+              if($start_date){ ?>
+                <div class="mem-abt-item" style="padding-left: 15px;">
+                  <h5>Start Date</h5> 
+                  <div class="mem-tag"><span><?=$start_date; ?></span></div>
+                </div><?php
+              }
+
+              if($skills){ ?>
+                <div class="mem-abt-item">
+                  <h5>Skills</h5>
+                  <div class="mem-tag"><?php
+                    foreach ($skills as $value) {
+                      echo '<span>'.$value.'</span>';
+                    } ?>
+                  </div>
+                </div><?php
+              }
+              if($abouts){ ?>
+                <div class="mem-abt-item">
+                  <h5>Interests</h5>
+                  <div class="mem-tag"><?php
+                    foreach ($abouts as $value) {
+                      echo '<span>'.$value.'</span>';
+                    } ?>
+                  </div>
+                </div><?php
+              } ?>
+            </div><?php
+          } ?>
+        </div><?php 
+      }
+  }
+}
+
+$chart =  json_encode($chart);
+//$chart = substr_replace($chart,'',0,1);
+//$chart = substr_replace($chart,'',-1);
+/*if(!isJson($chart)){
+  $chart = '{'.$chart.'}';
+}
+
+echo $chart; */ ?>
+
+<div id="chart-container"></div>
+
+<script type="text/javascript" src="<?=base_url();?>/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>/assets/chart/js/jquery.orgchart.js"></script>
+<script type="text/javascript">
+
+  $(function() {
+
+    var datascource = <?=$chart;?>;
+
+    $('#chart-container').orgchart({
+      'data' : datascource,
+      'depth': 2,
+      'nodeTitle': 'name',
+      'nodeContent': 'title',
+      'nodeID': 'id',
+      'createNode': function($node, data) {
+        var nodePrompt = $('<i>', {
+          click: function() {
+            $(this).siblings('.second-menu').toggle();
+          }
+        });
+        var secondMenu = '<div class="second-menu"><img class="avatar" src="' + data.image + '"></div>';
+        $node.append(nodePrompt).append(secondMenu);
+      }
+    });
+
+  });
+  </script>
+
+  <!-- sidepanel script start-->
+  <script>
+    $(function(){
+      $(".node").click(function(e) {
+        $(".profile-sidebar").removeClass('show-sidebar');
+        $("body").toggleClass("overflowhidden");
+        var id = $(this).attr('id');
+        $("#profile-sidebar-"+id).toggleClass("show-sidebar");
+        //console.log($(this).attr('id'));
+      });
+      $('body').click(function(evt){    
+        if($(evt.target).closest('.profile-sidebar,.node').length)
+        return;
+        $("body").removeClass("overflowhidden");
+        $(".profile-sidebar").removeClass("show-sidebar");
+      });
+  });
+  </script>
+   </body>
+</html>

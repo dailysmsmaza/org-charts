@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{font-family: 'Poppins', sans-serif; font-size: 14px; color: #333333; padding: 0; margin: 0; background-image: url(../images/orgchart-bg.jpg); background-repeat: no-repeat; background-position: left top; background-size: cover;}
+.profile-sidebar{position: fixed; z-index: 21; right: -300px; top: 0; width: 300px; background-color: #ffffff; height: 100%; overflow: auto; opacity: 0; visibility: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  transition: all 0.3s ease-in-out 0s; -moz-transition: all 0.3s ease-in-out 0s; -webkit-transition: all 0.3s ease-in-out 0s; -o-transition: all 0.3s ease-in-out 0s;
+}
+.show-sidebar{right: 0; visibility: visible; opacity: 1;}
+.member-profile-wrap{padding:15px 15px; background-image:url(../images/member-avtar.jpg); background-repeat: no-repeat; background-position: left top; background-size: cover;}
+.member-avtar{border-radius: 5px; overflow: hidden; width:180px; height: 180px; border-radius: 100%; margin:0 auto 15px; box-shadow:0 0 8px rgba(0,0,0,0.2); border: 2px solid #e8f2ff;}
+.member-avtar img{width: 100%; height: 100%; object-fit: cover;}
+.member-detail{text-align: center;}
+.member-detail h3{margin:0 0 5px; color: #ffffff; line-height:1; color: #ffffff; font-weight: 500;}
+.member-detail h5{margin: 0; color: #ffffff; font-weight: 400; line-height: 1;}
+.mem-loc-join{color: #ffffff; font-size: 14px; font-size: 13px; }
+.mem-loc-join img{position: absolute; left: 0; top:1px;}
+.mem-loc-join span{display: block; position: relative; padding-left: 22px; margin:3px 0px; display: inline-block; width: 100%; }
+.memeber-contact{padding-bottom: 12px;  font-size: 13px; }
+.memeber-contact h4{background-color: #ff9600; color: #ffffff; padding:6px 15px; font-weight:500; margin:0px 0 5px 0;  text-transform: uppercase; }
+.mem-cont-item{padding: 10px 15px 3px 45px;  color: #333333; position: relative; display: inline-block; width: 100%; line-height: 1.3;}
+.mem-cont-item img{position: absolute; left: 15px; top:12px;}
+.memeber-about{padding-bottom: 10px;}
+.memeber-about h4{background-color: #ff9600; color: #ffffff; padding:6px 15px; font-weight:500; margin:0px 0 5px 0;  text-transform: uppercase;}
+.memeber-about h5{margin: 0 0 2px; color: #333333; font-weight: 600; text-transform: uppercase; font-size: 14px;}
+.mem-abt-item{padding:5px 15px 10px;}
+.mem-tag span{border:1px solid #9ebeca; padding: 6px 8px; font-size: 12px; margin: 3px 2px 3px 0; color: #333333; display: inline-block; line-height: 1; border-radius: 30px;}
+.overflowhidden{overflow: hidden;}

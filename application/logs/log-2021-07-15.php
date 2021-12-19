@@ -1,0 +1,6 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-07-15 07:36:03 --> Severity: error --> Exception: syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\orgchart\application\controllers\User.php 64
+ERROR - 2021-07-15 07:36:03 --> Severity: Compile Warning --> Unterminated comment starting line 61 D:\xampp\htdocs\orgchart\application\controllers\User.php 61
+ERROR - 2021-07-15 07:36:21 --> Severity: error --> Exception: syntax error, unexpected end of file, expecting function (T_FUNCTION) or const (T_CONST) D:\xampp\htdocs\orgchart\application\controllers\User.php 64
+ERROR - 2021-07-15 07:36:21 --> Severity: Compile Warning --> Unterminated comment starting line 61 D:\xampp\htdocs\orgchart\application\controllers\User.php 61
