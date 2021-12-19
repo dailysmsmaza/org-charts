@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Employee_model extends CI_Model {
     
-    public function get_employee_list($department="",$search="",$company="",$per_page,$page_num){
+    public function get_employee_list($department="",$search="",$company="",$per_page="",$page_num=""){
         $where = "";       
         $this->db->select("*");
         $this->db->from("user_master");
