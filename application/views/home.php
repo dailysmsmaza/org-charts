@@ -17,7 +17,7 @@
                 <input type="email" name="user_email" required="required" class="form-control" placeholder="Enter your Work email">
                 <input type="submit" class="submitbtn" value="Get Started for Free">
             </form>
-            <div class="infotext">No credit cards required</div>
+            <div class="infotext">No credit card required</div>
           </div>
         </div>
     </div>

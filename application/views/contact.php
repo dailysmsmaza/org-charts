@@ -7,7 +7,7 @@
           <div class="col-lg-5 breadcrumb-wrap">
               <ul class="breadcrumb">
                   <li class="breadcrumb-item"><a href="<?php echo base_url() ?>">Home</a></li>
-                  <li class="breadcrumb-item active"><span>Contact us</span></li>
+                  <li class="breadcrumb-item active"><span>Contact Us</span></li>
               </ul>
           </div>
         </div>
